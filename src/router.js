@@ -1,12 +1,15 @@
 import VueRouter from 'vue-router'
 import VueScrollTo from 'vue-scrollto'
 
-import Welcome from './components/layouts/Welcome.vue'
+import Welcome from './components/layouts/Welcome'
 import Home from "./components/layouts/Home";
 
-import Login from './components/pages/Login.vue'
-import Register from './components/pages/Register.vue'
+import Login from './components/pages/Login'
+import Register from './components/pages/Register'
+
 import Dashboard from "./components/pages/Dashboard";
+import Events from "./components/pages/Events";
+import Location from "./components/pages/Location";
 
 let router = new VueRouter({
 	mode: 'hash',
@@ -22,6 +25,24 @@ let router = new VueRouter({
 					path: '/',
 					name: 'home',
 					component: Dashboard,
+					meta: {
+						layout: 'default',
+						requiresAuth: true
+					},
+				},
+				{
+					path: '/events',
+					name: 'home',
+					component: Events,
+					meta: {
+						layout: 'default',
+						requiresAuth: true
+					},
+				},
+				{
+					path: '/locations',
+					name: 'home',
+					component: Location,
 					meta: {
 						layout: 'default',
 						requiresAuth: true
