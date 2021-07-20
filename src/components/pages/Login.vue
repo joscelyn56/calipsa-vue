@@ -2,7 +2,7 @@
   <div class="authentication">
     <div class="auth">
       <div class="form">
-        <p>Sign in with credentials</p>
+        <p class="title">Sign in with credentials</p>
         <div class="fields">
           <input
             v-model="email"

@@ -2,7 +2,7 @@
   <div class="authentication">
     <div class="auth">
       <div class="form">
-        <p>Sign up with credentials</p>
+        <p class="title">Sign up with credentials</p>
         <div class="fields">
           <input
             v-model="name"

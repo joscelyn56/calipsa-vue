@@ -31,6 +31,10 @@ export default {}
   width: 275px;
 }
 
+.auth .title {
+  margin-bottom: 20px;
+}
+
 .fields {
   display: flex;
 }
@@ -51,6 +55,7 @@ export default {}
 
 .auth-links {
   text-align: center;
+  margin-top: 20px;
 }
 
 .auth-links a {
