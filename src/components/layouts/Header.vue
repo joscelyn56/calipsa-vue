@@ -4,7 +4,7 @@
       <router-link to="/">Calipsa</router-link>
     </div>
     <div class="links">
-      <p class="profile">Welcome</p>
+      <p class="profile">Welcome, {{ name | capitalizeAll }}</p>
       <p
         @click="logout"
         class="logout">Log Out</p>
@@ -13,6 +13,11 @@
 </template>
 <script>
 export default {
+  computed: {
+    name() {
+        return this.$store.getters['auth/name']
+    }
+  },
   methods: {
     logout() {
       this.$store.dispatch('auth/logout').then(() => {

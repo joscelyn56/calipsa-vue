@@ -5,25 +5,25 @@ const auth = {
 	state: {
 		accessToken: localStorage.getItem('access_token'),
 		authenticated: false,
-		// currentUser: JSON.parse(localStorage.getItem('user')),
+		currentUser: JSON.parse(localStorage.getItem('user')),
 	},
 	getters: {
 		token: state => state.accessToken,
 		isAuthenticated: state => state.authenticated,
-		// user: state => (state.currentUser === null) ? {} : state.currentUser,
-		// name: state => (state.currentUser === null) ? '' : state.currentUser.name,
+		user: state => (state.currentUser === null) ? {} : state.currentUser,
+		name: state => (state.currentUser === null) ? '' : state.currentUser.name,
 		back: state => state.backTo
 	},
 	mutations: {
 		storeToken(state, payload) {
 			localStorage.setItem('access_token', payload.token)
-			// localStorage.setItem('user', JSON.stringify(payload.user))
+			localStorage.setItem('user', JSON.stringify(payload.user))
 			state.authenticated = true
 		},
 		clearToken(state) {
 			state.access_token = ''
 			state.authenticated = false
-			// state.currentUser = ''
+			state.currentUser = ''
 		},
 		setBackTo(state, payload) {
 			state.backTo = payload
