@@ -59,7 +59,9 @@
         </template>
       </tbody>
     </table>
-    <div class="more-data">
+    <div
+      v-if="Object.keys(pagination).length > 0"
+      class="more-data">
       <button
         :disabled="pagination.prev_page >= pagination.current_page"
         @click="prev_page">Prev
@@ -138,23 +140,25 @@ export default {
     },
     fetchEvent() {
       let url = this.$BASE_URL + "events"
+
+      let query = ""
       let page = this.$route.query.page
-      if (page) url = url + "?page=" + page
+      if (page) query = query + "?page=" + page
 
       let search = this.$route.query.search
-      if (search) url = url + "?location=" + search
+      if (search) query = (query !== "") ? query + "&location=" + search : query + "?location=" + search
 
       let start_time = this.$route.query.start_time
-      if (start_time) url = url + "?start_time=" + start_time
+      if (start_time) query = (query !== "") ? query + "&start_time=" + start_time : query + "?start_time=" + start_time
 
       let end_time = this.$route.query.end_time
-      if (end_time) url = url + "?end_time=" + end_time
+      if (end_time) query = (query !== "") ? query + "&end_time=" + end_time : query + "?end_time=" + end_time
 
       let outcome = this.$route.query.outcome
-      if (outcome) url = url + "?outcome=" + outcome
+      if (outcome) query = (query !== "") ? query + "&outcome=" + outcome : query + "?outcome=" + outcome
 
       this.$http
-          .get(url)
+          .get(url + query)
           .then(response => {
             if (Object.keys(response.data).length >= 0) {
               this.eventsData = response.data.payload

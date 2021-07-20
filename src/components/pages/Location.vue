@@ -2,7 +2,7 @@
   <div class="table">
     <div class="search">
       <div class="search-text">
-        <label>Search Events</label>
+        <label>Search Locations</label>
         <input
           v-model="search"
           type="text">
@@ -35,7 +35,9 @@
         </template>
       </tbody>
     </table>
-    <div class="more-data">
+    <div
+      v-if="Object.keys(pagination).length > 0"
+      class="more-data">
       <button
         :disabled="pagination.prev_page >= pagination.current_page"
         @click="prev_page">Prev
@@ -96,14 +98,16 @@ export default {
     },
     fetchLocation() {
       let url = this.$BASE_URL + "locations";
+
+      let query = ""
       let page = this.$route.query.page;
       if (page) url = url + "?page=" + page;
 
       let search = this.$route.query.search
-      if (search) url = url + "?search=" + search
+      if (search) query = (query !== "") ? query + "&search=" + search : query + "?search=" + search
 
       this.$http
-          .get(url)
+          .get(url + query)
           .then(response => {
             if (Object.keys(response.data).length >= 0) {
               this.locationData = response.data.payload
