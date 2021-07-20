@@ -38,7 +38,7 @@ const auth = {
 		},
 		async logout({commit}) {
 			localStorage.removeItem('access_token')
-			// localStorage.removeItem('user')
+			localStorage.removeItem('user')
 			commit('clearToken')
 		},
 		async update({commit}, admin) {
