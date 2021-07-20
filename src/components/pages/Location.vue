@@ -1,5 +1,16 @@
 <template>
   <div class="table">
+    <div class="search">
+      <div class="search-text">
+        <label>Search Events</label>
+        <input
+          v-model="search"
+          type="text">
+      </div>
+      <div class="submit-search">
+        <button @click="searchEvents">Search</button>
+      </div>
+    </div>
     <table class="data-table">
       <thead>
         <th>Id</th>
@@ -51,16 +62,45 @@ export default {
     this.fetchLocation();
   },
   methods: {
+    searchEvents() {
+      let query = {
+        search: undefined
+      }
+
+      let update = false;
+
+      if (this.search !== "") {
+        query.search = this.search
+        update = true
+      }
+
+      if (update > 0) {
+        this.$router.push({
+          path: this.$router.currentRoute.path, query: query
+        })
+      }
+    },
     prev_page() {
-      this.$router.push({path: '/locations?page=' + this.pagination.prev_page})
+      this.$router.push({
+        path: this.$router.currentRoute.fullPath, query: {
+          page: this.pagination.prev_page
+        }
+      })
     },
     next_page() {
-      this.$router.push({path: '/locations?page=' + this.pagination.next_page})
+      this.$router.push({
+        path: this.$router.currentRoute.fullPath, query: {
+          page: this.pagination.next_page
+        }
+      })
     },
     fetchLocation() {
       let url = this.$BASE_URL + "locations";
       let page = this.$route.query.page;
       if (page) url = url + "?page=" + page;
+
+      let search = this.$route.query.search
+      if (search) url = url + "?search=" + search
 
       this.$http
           .get(url)

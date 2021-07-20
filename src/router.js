@@ -32,7 +32,7 @@ let router = new VueRouter({
 				},
 				{
 					path: '/events',
-					name: 'home',
+					name: 'events',
 					component: Events,
 					meta: {
 						layout: 'default',
@@ -41,7 +41,7 @@ let router = new VueRouter({
 				},
 				{
 					path: '/locations',
-					name: 'home',
+					name: 'locations',
 					component: Location,
 					meta: {
 						layout: 'default',
